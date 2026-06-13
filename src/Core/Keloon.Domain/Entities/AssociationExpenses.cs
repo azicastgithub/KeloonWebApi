@@ -1,0 +1,49 @@
+﻿using Keloon.Domain.Common;
+using Keloon.Domain.Enums;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Keloon.Domain.Entities
+{
+    [Table("AssociationExpenses")]
+    public class AssociationExpense : BaseEntity
+    {
+        [Key]
+        public Guid ExpenseId { get; set; }
+
+        [Required]
+        public ExpenseCategory Category { get; set; }
+
+        [Required]
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Amount { get; set; }
+
+        [Required]
+        public DateTime DateIncurred { get; set; }
+
+        [Required]
+        [MaxLength(500)]
+        public string Description { get; set; } = string.Empty;
+
+        public Guid? JournalEntryId { get; set; }
+
+        [ForeignKey(nameof(JournalEntryId))]
+        public JournalEntry? JournalEntry { get; set; }
+
+        [Required]
+        public Guid FinancialYearId { get; set; }
+
+        [ForeignKey(nameof(FinancialYearId))]
+        public FinancialYear FinancialYear { get; set; } = null!;
+
+        public Guid? VendorId { get; set; }
+
+        [ForeignKey(nameof(VendorId))]
+        public Vendor? Vendor { get; set; }
+    }
+}

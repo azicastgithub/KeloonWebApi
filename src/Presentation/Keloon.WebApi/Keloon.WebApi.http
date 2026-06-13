@@ -1,0 +1,6 @@
+@Keloon.WebApi_HostAddress = http://localhost:5147
+
+GET {{Keloon.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
